@@ -18,11 +18,11 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python ${{ python_min }}.*
     - setuptools-scm >=3.4.1
     - pip
   run:
-    - python >=3.6
+    - python >=${{ python_min }}
     - keyring
     - google-auth
     - requests
@@ -34,6 +34,9 @@ tests:
         - google_artifactregistry_auth
         - keyrings
       pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
 
 about:
   summary: Keyring backend for Google Auth tokens

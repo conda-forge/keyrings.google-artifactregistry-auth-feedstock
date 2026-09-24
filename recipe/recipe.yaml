@@ -1,21 +1,20 @@
 schema_version: 1
 
 context:
-  name: keyrings.google-artifactregistry-auth
   version: "1.1.1"
 
 package:
-  name: ${{ name|lower }}
+  name: keyrings.google-artifactregistry-auth
   version: ${{ version }}
 
 source:
-  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/keyrings.google-artifactregistry-auth-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/k/keyrings.google-artifactregistry-auth/keyrings.google-artifactregistry-auth-${{ version }}.tar.gz
   sha256: beb037fbf6b0c2ce11d810319fdc180cab8865daa2a16b109c3af73182ffe44d
 
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:

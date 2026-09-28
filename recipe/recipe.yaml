@@ -1,0 +1,53 @@
+schema_version: 1
+
+context:
+  version: "1.1.2"
+
+package:
+  name: keyrings.google-artifactregistry-auth
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/k/keyrings.google-artifactregistry-auth/keyrings.google-artifactregistry-auth-${{ version }}.tar.gz
+  sha256: bd6abb72740d2dfeb4a5c03c3b105c6f7dba169caa29dee3959694f1f02c77de
+
+build:
+  number: 0
+  noarch: python
+  script:
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    # remove stray files installed from sdist
+    - rm -r ${SP_DIR}/tests
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools-scm >=3.4.1
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - keyring
+    - google-auth
+    - requests
+    - pluggy
+
+tests:
+  - python:
+      imports:
+        - google_artifactregistry_auth
+        - keyrings
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+
+about:
+  summary: Keyring backend for Google Auth tokens
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/GoogleCloudPlatform/artifact-registry-python-tools
+
+extra:
+  recipe-maintainers:
+    - SandorSzalma1
+    - mgorny
